@@ -1,16 +1,66 @@
-# React + Vite
+# KeizerSec — Cybersecurity Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio personnel de **Kacime Benkhelifa (KeizerSec)**, SOC Analyst / Threat Intelligence Junior.  
+Construit avec React + Vite. Terminal interactif, thèmes dynamiques, effet Matrix canvas.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + Vite 8
+- Lucide React (icônes)
+- Styling 100% inline (CSS-in-JS)
+- ESLint 9
 
-## React Compiler
+## Fonctionnalités
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **3 thèmes** : Cyber (vert), Matrix (matrix green), Hacker (bleu GitHub)
+- **Terminal interactif** : commandes `help`, `about`, `skills`, `projects`, `writeups`, `litm`, `thm`, `contact`, `matrix`, `hack`, `whoami`
+- **Effet Matrix** : canvas rain activable via le terminal ou le bouton
+- **Konami code** : ↑↑↓↓←→←→BA
+- **Sections** : Hero / Certifications / Skills / Research (LitM) / Expérience / Projets GitHub / Write-ups / Achievements / Contact
 
-## Expanding the ESLint configuration
+## Structure du projet
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── App.jsx                   # Orchestrateur principal
+├── data/
+│   ├── themes.js             # Palettes de couleurs
+│   ├── skills.js             # Compétences techniques
+│   ├── projects.js           # Projets GitHub
+│   ├── writeups.js           # Write-ups & CTF
+│   ├── achievements.js       # Achievements TryHackMe
+│   └── certifications.js     # Certifications + stats
+└── components/
+    ├── Header.jsx
+    ├── Terminal.jsx
+    ├── HeroSection.jsx
+    ├── SkillsSection.jsx
+    ├── ResearchSection.jsx
+    ├── ExperienceSection.jsx
+    ├── ProjectsSection.jsx
+    ├── WriteupsSection.jsx
+    ├── AchievementsSection.jsx
+    ├── ContactSection.jsx
+    ├── Footer.jsx
+    └── SectionTitle.jsx
+```
+
+## Lancer en local
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Contact
+
+- Email : keizer.cybersec@protonmail.com
+- GitHub : [KeizerSec](https://github.com/KeizerSec)
+- TryHackMe : [Keizer](https://tryhackme.com/p/Keizer) — Top 2% mondial [0xD][LEGEND]
+- LinkedIn : [Kacime Benkhelifa](https://www.linkedin.com/in/kacime-benkhelifa)
