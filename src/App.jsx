@@ -107,7 +107,7 @@ export default function KeizerPortfolio() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: ct.bg, color: ct.text, fontFamily: MONO, position: "relative", overflowX: "hidden", cursor: "none" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: ct.bg, color: ct.text, fontFamily: MONO, position: "relative", overflowX: "hidden" }}>
       {splash && <SplashScreen ct={ct} mono={MONO} onDone={() => setSplash(false)} />}
       <CustomCursor ct={ct} />
       <style>{`
@@ -122,7 +122,8 @@ export default function KeizerPortfolio() {
         }
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-        *{margin:0;padding:0;box-sizing:border-box;cursor:none !important}
+        *{margin:0;padding:0;box-sizing:border-box}
+        @media (pointer: fine){*{cursor:none !important}}
         ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:#111} ::-webkit-scrollbar-thumb{background:${ct.primary}}
       `}</style>
 
