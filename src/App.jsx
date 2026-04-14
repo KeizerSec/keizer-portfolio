@@ -45,7 +45,6 @@ export default function KeizerPortfolio() {
   const [showTerminal, setShowTerminal] = useState(false);
   const [matrixMode, setMatrixMode] = useState(false);
   const [easterEgg, setEasterEgg] = useState(false);
-  const [animatedSkills, setAnimatedSkills] = useState(false);
 
   const canvasRef = useRef(null);
   const konamiRef = useRef([]);
@@ -57,11 +56,6 @@ export default function KeizerPortfolio() {
     setTheme(t);
     localStorage.setItem("ks-theme", t);
   };
-
-  useEffect(() => {
-    const t = setTimeout(() => setAnimatedSkills(true), 400);
-    return () => clearTimeout(t);
-  }, []);
 
   useEffect(() => { matrixRef.current = matrixMode; }, [matrixMode]);
 
@@ -113,12 +107,12 @@ export default function KeizerPortfolio() {
       <style>{`
         @keyframes slideIn { from { opacity:0; transform:translateX(100px); } to { opacity:1; transform:translateX(0); } }
         @keyframes glitch {
-          0%  { transform:translate(0); text-shadow: 2px 0 ${themes.cyber.primary}, -2px 0 ${themes.cyber.accent}; }
-          20% { transform:translate(-2px,2px); text-shadow: -2px 0 ${themes.cyber.primary}, 2px 0 ${themes.cyber.accent}; }
+          0%  { transform:translate(0); text-shadow: 2px 0 ${ct.primary}, -2px 0 ${ct.accent}; }
+          20% { transform:translate(-2px,2px); text-shadow: -2px 0 ${ct.primary}, 2px 0 ${ct.accent}; }
           40% { transform:translate(-2px,-2px); }
-          60% { transform:translate(2px,2px); text-shadow: 2px 0 ${themes.cyber.accent}, -2px 0 ${themes.cyber.primary}; }
+          60% { transform:translate(2px,2px); text-shadow: 2px 0 ${ct.accent}, -2px 0 ${ct.primary}; }
           80% { transform:translate(2px,-2px); }
-          100%{ transform:translate(0); text-shadow: 2px 0 ${themes.cyber.primary}, -2px 0 ${themes.cyber.accent}; }
+          100%{ transform:translate(0); text-shadow: 2px 0 ${ct.primary}, -2px 0 ${ct.accent}; }
         }
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
@@ -161,7 +155,7 @@ export default function KeizerPortfolio() {
         )}
 
         <HeroSection ct={ct} />
-        <RevealSection><SkillsSection ct={ct} mono={MONO} animatedSkills={animatedSkills} /></RevealSection>
+        <RevealSection><SkillsSection ct={ct} mono={MONO} /></RevealSection>
         <RevealSection delay={50}><ResearchSection ct={ct} mono={MONO} /></RevealSection>
         <RevealSection delay={50}><ExperienceSection ct={ct} mono={MONO} /></RevealSection>
         <RevealSection delay={50}><ProjectsSection ct={ct} mono={MONO} /></RevealSection>

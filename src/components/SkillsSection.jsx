@@ -1,10 +1,22 @@
+import { useEffect, useRef, useState } from "react";
 import { Cpu } from "lucide-react";
 import { skills } from "../data/skills";
 import SectionTitle from "./SectionTitle";
 
-export default function SkillsSection({ ct, mono, animatedSkills }) {
+export default function SkillsSection({ ct, mono }) {
+  const ref = useRef(null);
+  const [animated, setAnimated] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setAnimated(true); obs.disconnect(); }
+    }, { threshold: 0.15 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section id="skills" style={{ padding: "60px 20px", backgroundColor: ct.primary + "08" }}>
+    <section id="skills" ref={ref} style={{ padding: "60px 20px", backgroundColor: ct.primary + "08" }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         <SectionTitle icon={<Cpu size={24} />} text="ARSENAL TECHNIQUE" ct={ct} mono={mono} />
         {Object.entries(skills).map(([category, list]) => (
@@ -24,7 +36,7 @@ export default function SkillsSection({ ct, mono, animatedSkills }) {
                     <div style={{
                       height: "100%", borderRadius: "5px", backgroundColor: ct.primary,
                       boxShadow: "0 0 10px " + ct.primary + "66",
-                      width: animatedSkills ? skill.level + "%" : "0%",
+                      width: animated ? skill.level + "%" : "0%",
                       transition: "width 1s ease-out " + (idx * 0.08) + "s",
                     }} />
                   </div>

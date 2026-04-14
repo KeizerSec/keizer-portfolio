@@ -80,18 +80,34 @@ export default function HeroSection({ ct }) {
 
   return (
     <>
-      <section id="about" style={{ padding: "80px 20px 60px", textAlign: "center", animation: "fadeUp 0.5s ease-out" }}>
+      <section id="about" style={{
+        padding: "80px 20px 60px", textAlign: "center", animation: "fadeUp 0.5s ease-out",
+        backgroundImage: `radial-gradient(${ct.primary}18 1px, transparent 1px)`,
+        backgroundSize: "28px 28px",
+      }}>
         <div style={{ maxWidth: "960px", margin: "0 auto" }}>
 
           {/* Avatar */}
           <div style={{ marginBottom: "24px" }}>
-            <div style={{
-              width: "110px", height: "110px", borderRadius: "50%", margin: "0 auto",
-              border: "3px solid " + ct.primary,
-              boxShadow: "0 0 24px " + ct.primary + "55",
-              overflow: "hidden",
-            }}>
-              <img src="/avatar.jpg" alt="KeizerSec" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <div style={{ position: "relative", display: "inline-block" }}>
+              <div style={{
+                width: "110px", height: "110px", borderRadius: "50%", margin: "0 auto",
+                border: "3px solid " + ct.primary,
+                boxShadow: "0 0 24px " + ct.primary + "55",
+                overflow: "hidden",
+              }}>
+                <img src="/avatar.jpg" alt="KeizerSec" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+              {/* Indicateur online */}
+              <span style={{
+                position: "absolute", bottom: "6px", right: "6px",
+                width: "14px", height: "14px", borderRadius: "50%",
+                backgroundColor: "#00ff9d",
+                border: "2px solid " + ct.bg,
+                boxShadow: "0 0 8px #00ff9d",
+                animation: "pulse 2s infinite",
+                display: "block",
+              }} />
             </div>
           </div>
 
