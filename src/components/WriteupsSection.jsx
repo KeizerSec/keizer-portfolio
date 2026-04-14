@@ -80,8 +80,8 @@ export default function WriteupsSection({ ct, mono }) {
                   <ExternalLink size={12} /> Voir le write-up
                 </a>
               ) : (
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "5px", color: ct.text, opacity: 0.5, fontSize: "12px" }}>
-                  <Lock size={12} /> Lab personnel
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "4px 10px", border: "1px solid " + ct.secondary + "55", borderRadius: "4px", color: ct.secondary, fontSize: "11px", fontWeight: "bold", animation: "pulse 2.5s infinite" }}>
+                  <Lock size={11} /> En préparation
                 </span>
               )}
             </div>

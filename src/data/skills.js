@@ -14,7 +14,7 @@ export const skills = {
   ],
   "Sécurité IA / LLM": [
     { name: "Prompt Injection & alignement LLM", level: 88 },
-    { name: "Architectures multi-modèles (LitM/LLM-in-the-Middle)", level: 90 },
+    { name: "Architectures multi-modèles (LitM/LLM-in-the-Middle)", level: 100 },
     { name: "Recherche indépendante AI Security", level: 85 },
   ],
   "Tests de sécurité": [
