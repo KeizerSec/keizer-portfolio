@@ -13,6 +13,8 @@ import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import BackToTop from "./components/BackToTop";
+import CustomCursor from "./components/CustomCursor";
+import SplashScreen from "./components/SplashScreen";
 
 const MONO = "'Courier New', 'Lucida Console', monospace";
 
@@ -39,6 +41,7 @@ function RevealSection({ children, delay = 0 }) {
 
 export default function KeizerPortfolio() {
   const [theme, setTheme] = useState(() => localStorage.getItem("ks-theme") || "cyber");
+  const [splash, setSplash] = useState(true);
   const [showTerminal, setShowTerminal] = useState(false);
   const [matrixMode, setMatrixMode] = useState(false);
   const [easterEgg, setEasterEgg] = useState(false);
@@ -104,7 +107,9 @@ export default function KeizerPortfolio() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: ct.bg, color: ct.text, fontFamily: MONO, position: "relative", overflowX: "hidden" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: ct.bg, color: ct.text, fontFamily: MONO, position: "relative", overflowX: "hidden", cursor: "none" }}>
+      {splash && <SplashScreen ct={ct} mono={MONO} onDone={() => setSplash(false)} />}
+      <CustomCursor ct={ct} />
       <style>{`
         @keyframes slideIn { from { opacity:0; transform:translateX(100px); } to { opacity:1; transform:translateX(0); } }
         @keyframes glitch {
@@ -117,7 +122,7 @@ export default function KeizerPortfolio() {
         }
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-        *{margin:0;padding:0;box-sizing:border-box}
+        *{margin:0;padding:0;box-sizing:border-box;cursor:none !important}
         ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:#111} ::-webkit-scrollbar-thumb{background:${ct.primary}}
       `}</style>
 

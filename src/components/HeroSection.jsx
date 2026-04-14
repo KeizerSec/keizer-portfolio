@@ -49,9 +49,27 @@ function StatCard({ label, target, suffix, icon, sub, ct }) {
   );
 }
 
+const SUBTITLE = "SOC Analyst · Threat Intelligence · LLM Security Research";
+
+function useTypewriter(text, delay = 60) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let i = 0;
+    setDisplayed("");
+    const t = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(t);
+    }, delay);
+    return () => clearInterval(t);
+  }, [text, delay]);
+  return displayed;
+}
+
 export default function HeroSection({ ct }) {
   const [glitch, setGlitch] = useState(false);
   const glitchTimer = useRef(null);
+  const subtitle = useTypewriter(SUBTITLE, 40);
 
   const startGlitch = useCallback(() => {
     setGlitch(true);
@@ -99,8 +117,9 @@ export default function HeroSection({ ct }) {
             <span style={{ color: ct.primary }}>KEIZER</span>
             <span style={{ color: ct.accent }}>SEC</span>
           </h1>
-          <p style={{ fontSize: "clamp(12px, 1.8vw, 15px)", color: ct.secondary, marginBottom: "10px", letterSpacing: "1px" }}>
-            SOC Analyst · Threat Intelligence · LLM Security Research
+          <p style={{ fontSize: "clamp(12px, 1.8vw, 15px)", color: ct.secondary, marginBottom: "10px", letterSpacing: "1px", minHeight: "1.4em" }}>
+            {subtitle}
+            <span style={{ animation: "pulse 0.8s infinite", marginLeft: "1px", opacity: subtitle.length < SUBTITLE.length ? 1 : 0 }}>|</span>
           </p>
 
           <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginBottom: "44px", flexWrap: "wrap" }}>

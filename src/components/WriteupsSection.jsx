@@ -66,7 +66,6 @@ export default function WriteupsSection({ ct, mono }) {
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "7px", marginBottom: "10px", color: ct.primary, fontSize: "11px" }}>
                 <Calendar size={12} /> <span>{wu.date}</span>
-                <span style={{ marginLeft: "auto", fontSize: "11px", opacity: 0.6 }}>{wu.views} views</span>
               </div>
               <h4 style={{ fontSize: "15px", fontWeight: "bold", marginBottom: "10px", color: ct.primary, lineHeight: 1.3, paddingRight: "55px" }}>{wu.title}</h4>
               <p style={{ fontSize: "12px", color: ct.text, opacity: 0.7, marginBottom: "14px", lineHeight: 1.6 }}>{wu.description}</p>
