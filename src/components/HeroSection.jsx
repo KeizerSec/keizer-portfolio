@@ -77,20 +77,22 @@ export default function HeroSection({ ct }) {
             </div>
           </div>
 
-          <div style={{
-            display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 16px",
-            backgroundColor: ct.primary + "15", border: "1px solid " + ct.primary + "44",
-            borderRadius: "20px", marginBottom: "20px", fontSize: "11px", color: ct.primary, fontWeight: "bold",
-          }}>
-            <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: ct.primary, display: "inline-block", animation: "pulse 2s infinite" }} />
-            OPEN TO WORK — SOC Analyst / Threat Intelligence Junior
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 16px",
+              backgroundColor: ct.primary + "15", border: "1px solid " + ct.primary + "44",
+              borderRadius: "20px", fontSize: "11px", color: ct.primary, fontWeight: "bold",
+            }}>
+              <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: ct.primary, display: "inline-block", animation: "pulse 2s infinite" }} />
+              OPEN TO WORK — SOC Analyst / Threat Intelligence Junior
+            </div>
           </div>
 
           <h1
             onMouseEnter={startGlitch}
             style={{
               fontSize: "clamp(36px, 9vw, 68px)", fontWeight: "bold", marginBottom: "14px", lineHeight: 1.1,
-              cursor: "default", display: "inline-block",
+              cursor: "default", display: "block",
               animation: glitch ? "glitch 0.3s steps(1) 2" : "none",
             }}
           >

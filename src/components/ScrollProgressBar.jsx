@@ -18,7 +18,7 @@ export default function ScrollProgressBar({ ct }) {
       <div style={{
         height: "100%", width: progress + "%", backgroundColor: ct.primary,
         boxShadow: "0 0 10px " + ct.primary + ", 0 0 20px " + ct.primary + "66",
-        transition: "width 0.08s linear",
+        transition: "none",
       }} />
     </div>
   );
