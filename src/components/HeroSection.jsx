@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Code, Target, Award, Zap } from "lucide-react";
 import { statsData, certifications } from "../data/certifications";
 
@@ -50,6 +50,16 @@ function StatCard({ label, target, suffix, icon, sub, ct }) {
 }
 
 export default function HeroSection({ ct }) {
+  const [glitch, setGlitch] = useState(false);
+  const glitchTimer = useRef(null);
+
+  const startGlitch = useCallback(() => {
+    setGlitch(true);
+    glitchTimer.current = setTimeout(() => setGlitch(false), 600);
+  }, []);
+
+  useEffect(() => () => clearTimeout(glitchTimer.current), []);
+
   return (
     <>
       <section id="about" style={{ padding: "80px 20px 60px", textAlign: "center", animation: "fadeUp 0.5s ease-out" }}>
@@ -76,7 +86,14 @@ export default function HeroSection({ ct }) {
             OPEN TO WORK — SOC Analyst / Threat Intelligence Junior
           </div>
 
-          <h1 style={{ fontSize: "clamp(36px, 9vw, 68px)", fontWeight: "bold", marginBottom: "14px", lineHeight: 1.1 }}>
+          <h1
+            onMouseEnter={startGlitch}
+            style={{
+              fontSize: "clamp(36px, 9vw, 68px)", fontWeight: "bold", marginBottom: "14px", lineHeight: 1.1,
+              cursor: "default", display: "inline-block",
+              animation: glitch ? "glitch 0.3s steps(1) 2" : "none",
+            }}
+          >
             <span style={{ color: ct.primary }}>KEIZER</span>
             <span style={{ color: ct.accent }}>SEC</span>
           </h1>

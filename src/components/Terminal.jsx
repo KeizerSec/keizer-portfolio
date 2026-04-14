@@ -147,9 +147,25 @@ const INITIAL_HISTORY = [
 export default function Terminal({ ct, mono, matrixRef, setMatrixMode, setEasterEgg, onClose }) {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState(INITIAL_HISTORY);
+  const [cmdHistory, setCmdHistory] = useState([]);
+  const [histIndex, setHistIndex] = useState(-1);
   const terminalRef = useRef(null);
 
   const handleKeyDown = (e) => {
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const next = Math.min(histIndex + 1, cmdHistory.length - 1);
+      setHistIndex(next);
+      if (cmdHistory[next] !== undefined) setInput(cmdHistory[next]);
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const next = Math.max(histIndex - 1, -1);
+      setHistIndex(next);
+      setInput(next === -1 ? "" : cmdHistory[next]);
+      return;
+    }
     if (e.key !== "Enter") return;
     const cmd = input.trim().toLowerCase();
     const hist = [...history];
@@ -178,6 +194,8 @@ export default function Terminal({ ct, mono, matrixRef, setMatrixMode, setEaster
 
     hist.push({ type: "prompt", text: "root@keizersec:~$" });
     setHistory(hist);
+    if (cmd) setCmdHistory(prev => [cmd, ...prev.slice(0, 49)]);
+    setHistIndex(-1);
     setInput("");
     setTimeout(() => { if (terminalRef.current) terminalRef.current.scrollTop = terminalRef.current.scrollHeight; }, 20);
   };

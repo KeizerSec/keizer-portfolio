@@ -11,11 +11,34 @@ import WriteupsSection from "./components/WriteupsSection";
 import AchievementsSection from "./components/AchievementsSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import ScrollProgressBar from "./components/ScrollProgressBar";
+import BackToTop from "./components/BackToTop";
 
 const MONO = "'Courier New', 'Lucida Console', monospace";
 
+function RevealSection({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setVisible(true); obs.disconnect(); }
+    }, { threshold: 0.05 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div ref={ref} style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(32px)",
+      transition: `opacity 0.6s ease-out ${delay}ms, transform 0.6s ease-out ${delay}ms`,
+    }}>
+      {children}
+    </div>
+  );
+}
+
 export default function KeizerPortfolio() {
-  const [theme, setTheme] = useState("cyber");
+  const [theme, setTheme] = useState(() => localStorage.getItem("ks-theme") || "cyber");
   const [showTerminal, setShowTerminal] = useState(false);
   const [matrixMode, setMatrixMode] = useState(false);
   const [easterEgg, setEasterEgg] = useState(false);
@@ -26,6 +49,11 @@ export default function KeizerPortfolio() {
   const matrixRef = useRef(false);
 
   const ct = themes[theme];
+
+  const handleSetTheme = (t) => {
+    setTheme(t);
+    localStorage.setItem("ks-theme", t);
+  };
 
   useEffect(() => {
     const t = setTimeout(() => setAnimatedSkills(true), 400);
@@ -79,12 +107,22 @@ export default function KeizerPortfolio() {
     <div style={{ minHeight: "100vh", backgroundColor: ct.bg, color: ct.text, fontFamily: MONO, position: "relative", overflowX: "hidden" }}>
       <style>{`
         @keyframes slideIn { from { opacity:0; transform:translateX(100px); } to { opacity:1; transform:translateX(0); } }
-        @keyframes glitch { 0%{transform:translate(0)} 20%{transform:translate(-2px,2px)} 40%{transform:translate(-2px,-2px)} 60%{transform:translate(2px,2px)} 80%{transform:translate(2px,-2px)} 100%{transform:translate(0)} }
+        @keyframes glitch {
+          0%  { transform:translate(0); text-shadow: 2px 0 ${themes.cyber.primary}, -2px 0 ${themes.cyber.accent}; }
+          20% { transform:translate(-2px,2px); text-shadow: -2px 0 ${themes.cyber.primary}, 2px 0 ${themes.cyber.accent}; }
+          40% { transform:translate(-2px,-2px); }
+          60% { transform:translate(2px,2px); text-shadow: 2px 0 ${themes.cyber.accent}, -2px 0 ${themes.cyber.primary}; }
+          80% { transform:translate(2px,-2px); }
+          100%{ transform:translate(0); text-shadow: 2px 0 ${themes.cyber.primary}, -2px 0 ${themes.cyber.accent}; }
+        }
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
         *{margin:0;padding:0;box-sizing:border-box}
-        ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:#111} ::-webkit-scrollbar-thumb{background:var(--primary,#00ff9d)}
+        ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:#111} ::-webkit-scrollbar-thumb{background:${ct.primary}}
       `}</style>
+
+      <ScrollProgressBar ct={ct} />
+      <BackToTop ct={ct} />
 
       {matrixMode && (
         <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0, opacity: 0.25, pointerEvents: "none" }} />
@@ -102,7 +140,7 @@ export default function KeizerPortfolio() {
       <div style={{ position: "relative", zIndex: 1 }}>
         <Header
           ct={ct} mono={MONO}
-          theme={theme} setTheme={setTheme}
+          theme={theme} setTheme={handleSetTheme}
           showTerminal={showTerminal} setShowTerminal={setShowTerminal}
         />
 
@@ -117,13 +155,13 @@ export default function KeizerPortfolio() {
         )}
 
         <HeroSection ct={ct} />
-        <SkillsSection ct={ct} mono={MONO} animatedSkills={animatedSkills} />
-        <ResearchSection ct={ct} mono={MONO} />
-        <ExperienceSection ct={ct} mono={MONO} />
-        <ProjectsSection ct={ct} mono={MONO} />
-        <WriteupsSection ct={ct} mono={MONO} />
-        <AchievementsSection ct={ct} mono={MONO} />
-        <ContactSection ct={ct} mono={MONO} />
+        <RevealSection><SkillsSection ct={ct} mono={MONO} animatedSkills={animatedSkills} /></RevealSection>
+        <RevealSection delay={50}><ResearchSection ct={ct} mono={MONO} /></RevealSection>
+        <RevealSection delay={50}><ExperienceSection ct={ct} mono={MONO} /></RevealSection>
+        <RevealSection delay={50}><ProjectsSection ct={ct} mono={MONO} /></RevealSection>
+        <RevealSection delay={50}><WriteupsSection ct={ct} mono={MONO} /></RevealSection>
+        <RevealSection delay={50}><AchievementsSection ct={ct} mono={MONO} /></RevealSection>
+        <RevealSection delay={50}><ContactSection ct={ct} mono={MONO} /></RevealSection>
         <Footer ct={ct} />
       </div>
     </div>

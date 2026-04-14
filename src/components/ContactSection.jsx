@@ -1,31 +1,61 @@
-import { Mail, Code, Shield, Briefcase } from "lucide-react";
+import { useState } from "react";
+import { Mail, Code, Shield, Briefcase, Copy, Check } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
+const EMAIL = "keizer.cybersec@protonmail.com";
+
 export default function ContactSection({ ct, mono }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(EMAIL).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   return (
     <section id="contact" style={{ padding: "60px 20px", backgroundColor: ct.primary + "06" }}>
       <div style={{ maxWidth: "760px", margin: "0 auto", textAlign: "center" }}>
         <SectionTitle icon={<Mail size={24} />} text="CONTACT" ct={ct} mono={mono} />
-        <p style={{ fontSize: "14px", color: ct.text, opacity: 0.7, marginBottom: "12px" }}>
+        <p style={{ fontSize: "14px", color: ct.text, opacity: 0.7, marginBottom: "24px" }}>
           Intéressé par un poste SOC / Threat Intelligence ? Disponible sous 2 mois.
         </p>
-        <a href="mailto:keizer.cybersec@protonmail.com" style={{
-          display: "inline-flex", alignItems: "center", gap: "8px", padding: "12px 24px",
-          backgroundColor: ct.primary + "15", border: "2px solid " + ct.primary, borderRadius: "8px",
-          color: ct.primary, textDecoration: "none", fontWeight: "bold", fontSize: "14px",
-          marginBottom: "36px", transition: "all 0.3s",
-        }}
-          onMouseEnter={e => { e.currentTarget.style.backgroundColor = ct.primary; e.currentTarget.style.color = ct.bg; }}
-          onMouseLeave={e => { e.currentTarget.style.backgroundColor = ct.primary + "15"; e.currentTarget.style.color = ct.primary; }}
-        >
-          <Mail size={16} /> keizer.cybersec@protonmail.com
-        </a>
+
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", marginBottom: "36px" }}>
+          <a href={"mailto:" + EMAIL} style={{
+            display: "inline-flex", alignItems: "center", gap: "8px", padding: "12px 20px",
+            backgroundColor: ct.primary + "15", border: "2px solid " + ct.primary,
+            borderRadius: "8px 0 0 8px", color: ct.primary, textDecoration: "none",
+            fontWeight: "bold", fontSize: "14px", transition: "all 0.3s",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.backgroundColor = ct.primary; e.currentTarget.style.color = ct.bg; }}
+            onMouseLeave={e => { e.currentTarget.style.backgroundColor = ct.primary + "15"; e.currentTarget.style.color = ct.primary; }}
+          >
+            <Mail size={16} /> {EMAIL}
+          </a>
+          <button onClick={handleCopy} title="Copier l'adresse" style={{
+            display: "inline-flex", alignItems: "center", justifyContent: "center",
+            padding: "12px 14px", backgroundColor: copied ? ct.primary : ct.primary + "15",
+            border: "2px solid " + ct.primary, borderLeft: "none",
+            borderRadius: "0 8px 8px 0", color: copied ? ct.bg : ct.primary,
+            cursor: "pointer", transition: "all 0.3s", fontFamily: mono,
+          }}>
+            {copied ? <Check size={16} /> : <Copy size={16} />}
+          </button>
+        </div>
+
+        {copied && (
+          <div style={{ fontSize: "12px", color: ct.primary, marginTop: "-24px", marginBottom: "24px", animation: "fadeUp 0.3s ease-out" }}>
+            Adresse copiée !
+          </div>
+        )}
 
         <div style={{ display: "flex", justifyContent: "center", gap: "14px", flexWrap: "wrap", marginBottom: "36px" }}>
           {[
-            { icon: <Code size={20} />,     name: "GitHub",    url: "https://github.com/KeizerSec",                     sub: "KeizerSec" },
-            { icon: <Shield size={20} />,   name: "TryHackMe", url: "https://tryhackme.com/p/Keizer",                   sub: "Top 2% LEGEND" },
-            { icon: <Briefcase size={20} />, name: "LinkedIn", url: "https://www.linkedin.com/in/kacime-benkhelifa",    sub: "Kacime Benkhelifa" },
+            { icon: <Code size={20} />,      name: "GitHub",    url: "https://github.com/KeizerSec",                  sub: "KeizerSec" },
+            { icon: <Shield size={20} />,    name: "TryHackMe", url: "https://tryhackme.com/p/Keizer",                sub: "Top 2% LEGEND" },
+            { icon: <Briefcase size={20} />, name: "LinkedIn",  url: "https://www.linkedin.com/in/kacime-benkhelifa", sub: "Kacime Benkhelifa" },
           ].map((s, idx) => (
             <a key={idx} href={s.url} target="_blank" rel="noopener noreferrer" style={{
               display: "flex", flexDirection: "column", alignItems: "center", gap: "6px",
