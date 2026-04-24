@@ -96,7 +96,7 @@ export default function HeroSection({ ct }) {
                 boxShadow: "0 0 24px " + ct.primary + "55",
                 overflow: "hidden",
               }}>
-                <img src="/avatar.jpg" alt="KeizerSec" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src="/avatar.png" alt="KeizerSec" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
               {/* Indicateur online */}
               <span style={{
