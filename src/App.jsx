@@ -116,6 +116,7 @@ export default function KeizerPortfolio() {
         }
         @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+        @keyframes scanline { 0%{background-position:0 -100%} 100%{background-position:0 100%} }
         *{margin:0;padding:0;box-sizing:border-box}
         @media (pointer: fine){*{cursor:none !important}}
         ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:#111} ::-webkit-scrollbar-thumb{background:${ct.primary}}

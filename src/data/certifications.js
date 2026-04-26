@@ -4,4 +4,4 @@ export const certifications = [
   { name: "Pre-Security",         issuer: "TryHackMe", color: "#ff9500", icon: "🔐" },
 ];
 
-export const statsData = { repos: 6, rooms: 178, badges: 28, hours: 1000 };
+export const statsData = { repos: 8, rooms: 181, badges: 28, hours: 1000 };

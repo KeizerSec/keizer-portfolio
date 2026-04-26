@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Code, Target, Award, Zap } from "lucide-react";
 import { statsData, certifications } from "../data/certifications";
+import LiveBadgeWindow from "./LiveBadgeWindow";
 
 function useCountUp(target, active) {
   const [value, setValue] = useState(0);
@@ -138,10 +139,10 @@ export default function HeroSection({ ct }) {
             <span style={{ animation: "pulse 0.8s infinite", marginLeft: "1px", opacity: subtitle.length < SUBTITLE.length ? 1 : 0 }}>|</span>
           </p>
 
+          <LiveBadgeWindow ct={ct} />
+
           <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginBottom: "44px", flexWrap: "wrap" }}>
             {[
-              { label: "[0xD][LEGEND]",               color: ct.primary },
-              { label: "Top 2% TryHackMe",            color: "#ffd700" },
               { label: "Professional",                 color: ct.secondary },
               { label: "CC BY-NC-SA 4.0 — LitM Author", color: ct.accent },
             ].map((badge, i) => (
