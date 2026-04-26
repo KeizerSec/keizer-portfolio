@@ -24,6 +24,11 @@ export default function ProjectsSection({ ct, mono }) {
                 </div>
               </div>
               <p style={{ fontSize: "12px", color: ct.text, opacity: 0.75, lineHeight: 1.6, marginBottom: "14px", flex: 1 }}>{proj.description}</p>
+              {proj.preview && (
+                <a href={proj.url} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginBottom: "14px", borderRadius: "8px", overflow: "hidden", border: "1px solid " + ct.primary + "33", backgroundColor: "#000" }}>
+                  <img src={proj.preview} alt={proj.previewAlt || proj.name} loading="lazy" style={{ display: "block", width: "100%", height: "auto" }} />
+                </a>
+              )}
               <ul style={{ marginBottom: "14px", listStyle: "none", display: "flex", flexDirection: "column", gap: "4px" }}>
                 {proj.features.map((f, i) => (
                   <li key={i} style={{ fontSize: "11px", color: ct.text, opacity: 0.65, display: "flex", gap: "6px" }}>
